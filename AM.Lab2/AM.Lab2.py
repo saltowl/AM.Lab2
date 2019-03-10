@@ -23,10 +23,18 @@ def calculate_standard_deviation (v1, v2):
 	return math.sqrt(res / (len(v1) - 1))
 
 def main():
-	matrix = [[0.4, 0.6], [0.3, 0.7]]
-	pi = [0.1, 0.9]
-	eps = 0.1
-	simulation_Markov_chain(matrix, pi, eps)
+	matrix = [[0.2, 0, 0.4, 0.1, 0, 0, 0.15, 0.15],
+		   [0, 0.1, 0, 0.2, 0.5, 0, 0.2, 0],
+		   [0.1, 0, 0.1, 0, 0, 0.4, 0.3, 0.1],
+		   [0, 0.1, 0, 0.3, 0, 0, 0.3, 0.3], 
+		   [0.4, 0, 0.2, 0.2, 0.1, 0.1, 0, 0],
+		   [0, 0.3, 0.15, 0, 0.4, 0.1, 0, 0.05],
+		   [0.1, 0.2, 0.05, 0.1, 0, 0.2, 0.05, 0.3],
+		   [0.2, 0.3, 0.1, 0.1, 0, 0.2, 0, 0.1]]
+	
+	pi = [1, 0, 0, 0, 0, 0, 0, 0]
+	eps = 0.000001
+	print(simulation_Markov_chain(matrix, pi, eps))
 	pass
 
 main()
