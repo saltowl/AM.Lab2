@@ -22,6 +22,16 @@ def calculate_standard_deviation (v1, v2):
 
 	return math.sqrt(res / (len(v1) - 1))
 
+def simulation_Markov_chain_analytically (matrix, pi):
+	a = matrix.transpose() - np.identity(len(matrix))
+	norm = np.ones(len(matrix))
+	a[len(matrix) - 1] = norm
+
+	b = np.zeros(len(matrix))
+	b[len(matrix) - 1] = 1
+
+	return np.linalg.solve(a, b)
+
 def main():
 	matrix = [[0.2, 0, 0.4, 0.1, 0, 0, 0.15, 0.15],
 		   [0, 0.1, 0, 0.2, 0.5, 0, 0.2, 0],
