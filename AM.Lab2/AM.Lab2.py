@@ -33,18 +33,32 @@ def simulation_Markov_chain_analytically (matrix, pi):
 	return np.linalg.solve(a, b)
 
 def main():
-	matrix = [[0.2, 0, 0.4, 0.1, 0, 0, 0.15, 0.15],
-		   [0, 0.1, 0, 0.2, 0.5, 0, 0.2, 0],
-		   [0.1, 0, 0.1, 0, 0, 0.4, 0.3, 0.1],
-		   [0, 0.1, 0, 0.3, 0, 0, 0.3, 0.3], 
-		   [0.4, 0, 0.2, 0.2, 0.1, 0.1, 0, 0],
-		   [0, 0.3, 0.15, 0, 0.4, 0.1, 0, 0.05],
-		   [0.1, 0.2, 0.05, 0.1, 0, 0.2, 0.05, 0.3],
-		   [0.2, 0.3, 0.1, 0.1, 0, 0.2, 0, 0.1]]
+	matrix = np.array([[0.2, 0, 0.4, 0.1, 0, 0, 0.15, 0.15],
+					[0, 0.1, 0, 0.2, 0.5, 0, 0.2, 0],
+					[0.1, 0, 0.1, 0, 0, 0.4, 0.3, 0.1],
+					[0, 0.1, 0, 0.3, 0, 0, 0.3, 0.3], 
+					[0.4, 0, 0.2, 0.2, 0.1, 0.1, 0, 0],
+					[0, 0.3, 0.15, 0, 0.4, 0.1, 0, 0.05],
+					[0.1, 0.2, 0.05, 0.1, 0, 0.2, 0.05, 0.3],
+					[0.2, 0.3, 0.1, 0.1, 0, 0.2, 0, 0.1]])
 	
-	pi = [1, 0, 0, 0, 0, 0, 0, 0]
-	eps = 0.000001
-	print(simulation_Markov_chain(matrix, pi, eps))
+	print('Source transition probability matrix')
+	print(matrix)
+
+	eps = 0.000000001
+	print('\n\nThe vectors of the distribution over the states obtained numerically with precision: ', eps)
+	pi0 = [1, 0, 0, 0, 0, 0, 0, 0]
+	print('\nFor initial state vector: ', pi0)
+	print(simulation_Markov_chain(matrix, pi0, eps))
+	pi1 = [0, 0, 1, 0, 0, 0, 0, 0]
+	print('\nFor initial state vector: ', pi1)
+	print(simulation_Markov_chain(matrix, pi1, eps))
+	pi2 = [0.25, 0, 0.25, 0, 0.5, 0, 0, 0]
+	print('\nFor initial state vector: ', pi2)
+	print(simulation_Markov_chain(matrix, pi2, eps))
+
+	print('\n\nThe vector of the distribution over the states obtained analytically')
+	print(simulation_Markov_chain_analytically(matrix, pi0))
 	pass
 
 main()
