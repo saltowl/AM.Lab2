@@ -5,13 +5,21 @@ def simulation_Markov_chain (matrix, pi, eps):
 	standard_deviation = np.inf
 	steps_count = 2
 	result = pi
+	x = []
+	y = []
 
 	while (standard_deviation > eps):
 		current_matrix = np.linalg.matrix_power(matrix, steps_count)
 		prev_result = result
 		result = np.dot(pi, current_matrix)
-		steps_count += 1
 		standard_deviation = calculate_standard_deviation(prev_result, result)
+
+		x.append(steps_count)
+		y.append(standard_deviation)
+
+		steps_count += 1
+
+	plot_graph_of_standard_deviation(x, y, pi)
 
 	return result
 
@@ -32,6 +40,14 @@ def simulation_Markov_chain_analytically (matrix, pi):
 
 	return np.linalg.solve(a, b)
 
+def plot_graph_of_standard_deviation (x, y, pi):
+	plt.style.use("bmh")
+	plt.plot(x, y, label = 'π = (' + ', '.join([str(num) for num in pi ]) + ')')
+	plt.xlabel('Number of step')
+	plt.ylabel('Standard deviation between two adjacent vectors')
+	plt.title('Change in standard deviation')
+	plt.legend()
+	pass
 def main():
 	matrix = np.array([[0.2, 0, 0.4, 0.1, 0, 0, 0.15, 0.15],
 					[0, 0.1, 0, 0.2, 0.5, 0, 0.2, 0],
@@ -58,7 +74,7 @@ def main():
 	print(simulation_Markov_chain(matrix, pi2, eps))
 
 	print('\n\nThe vector of the distribution over the states obtained analytically')
-	print(simulation_Markov_chain_analytically(matrix, pi0))
+	plt.show()
 	pass
 
 main()
