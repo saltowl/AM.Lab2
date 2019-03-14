@@ -31,7 +31,7 @@ def calculate_standard_deviation (v1, v2):
 
 	return math.sqrt(res / (len(v1) - 1))
 
-def simulation_Markov_chain_analytically (matrix, pi):
+def simulation_Markov_chain_analytically (matrix):
 	a = matrix.transpose() - np.identity(len(matrix))
 	a[len(matrix) - 1] = np.ones(len(matrix))
 
@@ -78,7 +78,7 @@ def main():
 	print_result_of_simulation_Markov_chain(transition_matrix, pi2, eps)
 
 	print('\n\nThe vector of the distribution over the states obtained analytically')
-	print(simulation_Markov_chain_analytically(transition_matrix, pi0))
+	print(simulation_Markov_chain_analytically(transition_matrix))
 
 	plt.show()
 	pass
